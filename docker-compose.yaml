@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: dev
+    container_name: dealer-status
+    working_dir: /app/dealer-status
+    command: ./dealer-status
+    volumes:
+      - .:/app/
+      - ${SSH_FILE}:/root/.ssh/id_rsa:ro
+    env_file:
+      - .env
+    environment:
+      - SSH_KEY=${ID_RSA}
